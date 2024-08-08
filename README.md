@@ -2,6 +2,14 @@
 
 These scripts are built directly on top of the (amazing) QCoDeS standard. Normally QCoDeS would be sufficient for running measurements in the form of a simple script could be made on a case-by-case basis for running measurements. However, we intend to use LabVIEW for the purpose of providing our front end, so the code here could be considered a "back end" of sorts.
 
+To list available VISA devices run (we ought to put this into a proper script for LabVIEW eventually):
+
+```python
+import pyvisa
+rm = pyvisa.ResourceManager()
+rm.list_resources()
+```
+
 ## TODO!
 
 1. Create tests for each function
