@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox, QFileDialog, \
     QPushButton, QCheckBox, QHeaderView, QLineEdit, QListWidgetItem, QAction
 from PyQt5.QtGui import QTextCursor
 import sys, os
+from pathlib import Path
 from datetime import datetime
 from ruamel.yaml import YAML
 import matplotlib
@@ -14,13 +15,11 @@ from GUI_Dialogs import *
 from handlers import WriteStream, OutputThread
 from queue import Queue
 
-# sys.path.append(os.environ['MeasureItHome'])
-# import MeasureIt
-from sweeps.util import _value_parser, _name_parser, save_to_csv, safe_set, safe_get, ParameterException
-from sweeps.base_sweep import BaseSweep
-from sweeps.sweep0d import Sweep0D
-from sweeps.sweep1d import Sweep1D
-from sweeps.sweep_queue import SweepQueue, DatabaseEntry
+from utils.util import _value_parser, _name_parser, save_to_csv, safe_set, safe_get, ParameterException
+from utils.base_sweep import BaseSweep
+from utils.sweep0d import Sweep0D
+from utils.sweep1d import Sweep1D
+from utils.sweep_queue import SweepQueue, DatabaseEntry
 import qcodes as qc
 from qcodes import Station, Instrument, initialise_or_create_database_at
 from qcodes.dataset.experiment_container import experiments
@@ -29,6 +28,15 @@ from qcodes.dataset.data_set import DataSet, load_by_run_spec
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
 matplotlib.use('Qt5Agg')
+
+current_date = datetime.now().strftime("%Y-%m-%d")
+
+# Common file paths, ensure they exist
+from utils.file_paths import FILE_PATHS
+
+for path_name, path_value in FILE_PATHS.items():
+    if not os.path.exists(path_value):
+        print(f"Warning: {path_name} does not exist.")
 
 
 class UImain(QtWidgets.QMainWindow):
@@ -169,10 +177,8 @@ class UImain(QtWidgets.QMainWindow):
         self.set_param_index = index
 
     def start_logs(self):
-        self.stdout_filename = '\\logs\\stdout\\' + datetime.now().strftime(
-            "%Y-%m-%d") + '.txt'
-        self.stderr_filename = '\\logs\\stderr\\' + datetime.now().strftime(
-            "%Y-%m-%d") + '.txt'
+        self.stdout_filename = os.path.join(FILE_PATHS["log_base_dir"], f'stdout-{current_date}.txt')
+        self.stderr_filename = os.path.join(FILE_PATHS["log_base_dir"], f'stderr-{current_date}.txt')
 
         self.stdout_file = open(self.stdout_filename, 'a')
         sys.stderr = open(self.stderr_filename, 'a')
@@ -185,7 +191,7 @@ class UImain(QtWidgets.QMainWindow):
 
     def load_station(self):
         (fileName, x) = QFileDialog.getOpenFileName(self, "Load Station",
-                                                    "\\cfg\\",
+                                                    FILE_PATHS["config_base_dir"],
                                                     "Stations (*.station.yaml)")
 
         if len(fileName) == 0:
@@ -253,7 +259,7 @@ class UImain(QtWidgets.QMainWindow):
             yaml.dump(snap, file)
             if set_as_default:
                 qc.config['station']['default_file'] = filename
-                qc.config.save_config('\\cfg\\qcodesrc.json')
+                qc.config.save_config(os.path.join(FILE_PATHS["config_base_dir"], f'qcodesrc.json'))
 
     def edit_parameters(self):
         param_ui = EditParameterGUI(self.devices, self.track_params, self.set_params, self)
@@ -637,7 +643,7 @@ class UImain(QtWidgets.QMainWindow):
             self.sweep = self.create_sweep()
 
         (filename, x) = QFileDialog.getSaveFileName(self, "Save Sweep as JSON",
-                                                    f"{os.environ['MeasureItHome']}\\Experiments\\untitled_sweep.json",
+                                                    os.path.join(FILE_PATHS["experiment_base_dir"], f"untitled_sweep.json"),
                                                     "JSON (*.txt *.json)")
 
         if len(filename) > 0:
@@ -645,7 +651,7 @@ class UImain(QtWidgets.QMainWindow):
 
     def load_sweep(self):
         (filename, x) = QFileDialog.getOpenFileName(self, "Load Sweep from JSON",
-                                                    f"{os.environ['MeasureItHome']}\\Experiments\\",
+                                                    FILE_PATHS["experiment_base_dir"],
                                                     "JSON (*.txt *.json)")
 
         if len(filename) > 0:
@@ -679,7 +685,7 @@ class UImain(QtWidgets.QMainWindow):
 
     def save_sequence(self):
         (filename, x) = QFileDialog.getSaveFileName(self, "Save Sequence as JSON",
-                                                    f"{os.environ['MeasureItHome']}\\Experiments\\untitled.json",
+                                                    os.path.join(FILE_PATHS["experiment_base_dir"], f"untitled.json"),
                                                     "JSON (*.txt *.json)")
 
         if len(filename) > 0:
@@ -687,7 +693,7 @@ class UImain(QtWidgets.QMainWindow):
 
     def load_sequence(self):
         (filename, x) = QFileDialog.getOpenFileName(self, "Load Sequence from JSON",
-                                                    f"{os.environ['MeasureItHome']}\\Experiments\\",
+                                                    FILE_PATHS["experiment_base_dir"],
                                                     "JSON (*.txt *.json)")
 
         if len(filename) > 0:
@@ -889,7 +895,7 @@ class UImain(QtWidgets.QMainWindow):
 
     def export_all_datasets(self):
         directory = QFileDialog.getExistingDirectory(self, "Save Data to .csv",
-                                                     f'{os.environ["MeasureItHome"]}\\Origin Files\\')
+                                                     FILE_PATHS["origin_base_dir"])
         if len(directory) == 0:
             return
 
@@ -972,8 +978,8 @@ class UImain(QtWidgets.QMainWindow):
 
 
 def main():
-    if os.path.isfile('\\cfg\\qcodesrc.json'):
-        qc.config.update_config('\\cfg\\')
+    if os.path.isfile(os.path.join(FILE_PATHS["config_base_dir"], f"qcodesrc.json")):
+        qc.config.update_config(path(FILE_PATHS["config_base_dir"]))
 
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)

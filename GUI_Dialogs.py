@@ -15,12 +15,20 @@ from qcodes.dataset.plotting import plot_dataset
 sys.path.append("..")
 # import src
 from qcodes import load_by_run_spec
-from sweeps.util import _value_parser, save_to_csv
-from sweeps.sweep0d import Sweep0D
-from sweeps.sweep1d import Sweep1D
+from utils.util import _value_parser, save_to_csv
+from utils.sweep0d import Sweep0D
+from utils.sweep1d import Sweep1D
 from local_instruments import LOCAL_INSTRUMENTS
 
 os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+
+current_date = datetime.now().strftime("%Y-%m-%d")
+# Common file paths, ensure they exist
+from utils.file_paths import FILE_PATHS
+
+for path_name, path_value in FILE_PATHS.items():
+    if not os.path.exists(path_value):
+        print(f"Warning: {path_name} does not exist.")
 
 
 class EditSweepGUI(QtWidgets.QDialog):
@@ -168,7 +176,7 @@ class SaveDataGUI(QtWidgets.QDialog):
 
     def select_db(self):
         fileName = QFileDialog.getSaveFileName(self, "Select Database",
-                                               f"\\Databases\\",
+                                               FILE_PATHS["database_base_dir"],
                                                "Database (*.db)", options=QFileDialog.DontConfirmOverwrite)
         if len(fileName[0]) > 0:
             self.url = fileName[0]
@@ -194,7 +202,7 @@ class SaveStationGUI(QtWidgets.QDialog):
 
     def select_file(self):
         fileName = QFileDialog.getSaveFileName(self, "Save Station",
-                                               "\\cfg\\new_station.station.yaml",
+                                               os.path.join(FILE_PATHS["config_base_dir"], "new_station.station.yaml"),
                                                "Stations (*.station.yaml)")
         if len(fileName[0]) > 0:
             self.url = fileName[0]
@@ -382,7 +390,7 @@ class ViewDatasetGUI(QtWidgets.QDialog):
 
     def save_to_txt(self):
         fileName = QFileDialog.getSaveFileName(self, "Save Data to .csv",
-                                               f'\\Origin Files\\'
+                                               FILE_PATHS["origin_base_dir"],
                                                f'{self.ds.run_id}_{self.ds.exp_name}_{self.ds.sample_name}.csv',
                                                "Data files (*.csv)")
         if len(fileName[0]) == 0:
