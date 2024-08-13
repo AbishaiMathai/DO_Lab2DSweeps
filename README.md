@@ -17,6 +17,8 @@ rm.list_resources()
 3. Documentation on each function
 4. Abstract sweeps to handle any SMU as opposed to just Keithley 2450s 
 5. Implement lock-in amplifiers and temperature controllers (?)
+6. Keithleys need additional features in initialization function: front/back panel mode 
+7. Declare sweeps using a fixed sample count instead of a step size
 
 ## Project Structure
 
