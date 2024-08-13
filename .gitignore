@@ -1,7 +1,11 @@
-__pycache__
 __pycache__/
-logs
+Databases/
+Drivers/
+Experiments/
+Origin Files/
+cfg/
 logs/
+utils/
 .DS_Store
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
