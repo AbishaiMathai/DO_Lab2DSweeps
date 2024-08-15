@@ -9,7 +9,7 @@ The goal of this is to simplify some of the code from MeasureIt (removing the cl
 - [ ] implement 2D sweep functionality to the GUI
     - [x] add "2D Sweeps" entry to the menu bar (top) along with the dropdown entry for "Create 2D Sweep" 
     - [x] when "Create 2D Sweep" is clicked open a new window
-    - [ ] fill the window with fields necessary for configuring and running a 2D sweep
+    - [x] fill the window with fields necessary for configuring and running a 2D sweep
     - [ ] implement the ability to send the 2D sweep to the sweep queue
 - [ ] comment the GUI code
 - [ ] create a new requirements file for ease of installation

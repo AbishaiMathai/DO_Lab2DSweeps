@@ -6,63 +6,549 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>817</width>
+    <height>552</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>240</y>
-     <width>341</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Scan Controls</string>
+     </property>
+     <widget class="QGroupBox" name="controlBox">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>350</y>
+        <width>211</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Controls</string>
+      </property>
+      <widget class="QPushButton" name="startButton2D">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Start</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="flipDirectionButto2D">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>80</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Flip direction</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pauseButton2D">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Pause</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="endButton2D">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>End</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>161</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Status</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>141</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLabel" name="scanLabel">
+              <property name="text">
+               <string>Scanning?</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="paramLabel">
+              <property name="text">
+               <string>Parameter</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="setpointLabel">
+              <property name="text">
+               <string>Setpoint</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="directionLabel">
+              <property name="text">
+               <string>Direction</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="scanValue2D">
+              <property name="text">
+               <string>False</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="paramValue2D">
+              <property name="text">
+               <string>--</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="setpointValue2D">
+              <property name="text">
+               <string>--</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="directionValue2D">
+              <property name="text">
+               <string>--</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>179</x>
+        <y>29</y>
+        <width>181</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Plot Settings</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>161</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="sweepOptionsLayout_4">
+        <item>
+         <layout class="QHBoxLayout" name="saveLayout_3">
+          <item>
+           <widget class="QCheckBox" name="saveBox2D">
+            <property name="text">
+             <string>Save data</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveButton2D">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>40</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Setup</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="livePlotBox2D">
+          <property name="text">
+           <string>Live plot</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="plotbinLayout_3">
+          <item>
+           <widget class="QLabel" name="plotbinLabel_3">
+            <property name="text">
+             <string>Plot bin</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="plotbinEdit2D">
+            <property name="text">
+             <string>1</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="scanGroupBox">
+     <property name="title">
+      <string>Source Measurement Settings</string>
+     </property>
+     <widget class="QGroupBox" name="setupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>371</width>
+        <height>241</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Inner Sweep</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>171</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="scanHorizontalLayout">
+        <item>
+         <layout class="QVBoxLayout" name="scanLabelVerticalLayout">
+          <item>
+           <widget class="QLabel" name="startLabel">
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="endLabel">
+            <property name="text">
+             <string>End</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="stepLabel">
+            <property name="text">
+             <string>Step</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="stepsecLabel">
+            <property name="text">
+             <string>Step/sec</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="scanValuesLayout">
+          <item>
+           <widget class="QLineEdit" name="startInner">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="endInner"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="stepInner"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="stepsecInner"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QComboBox" name="scanParameterInner">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>30</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="scanParameterLabel">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>71</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Parameter:</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="layoutWidget_6">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>30</y>
+         <width>161</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="sweepOptionsLayout_5">
+        <item>
+         <widget class="QCheckBox" name="bidirectionalInner">
+          <property name="text">
+           <string>Bidirectional</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="continualInner">
+          <property name="text">
+           <string>Continual</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="rampToStartInner">
+          <property name="text">
+           <string>Ramp to start</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="setupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>280</y>
+        <width>371</width>
+        <height>241</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Outer Sweep</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>171</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="scanHorizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="scanLabelVerticalLayout_2">
+          <item>
+           <widget class="QLabel" name="startLabel_2">
+            <property name="text">
+             <string>Start</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="endLabel_2">
+            <property name="text">
+             <string>End</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="stepLabel_2">
+            <property name="text">
+             <string>Step</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="stepsecLabel_2">
+            <property name="text">
+             <string>Step/sec</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="scanValuesLayout_2">
+          <item>
+           <widget class="QLineEdit" name="startOuter">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="endOuter"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="stepOuter"/>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="stepsecOuter"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QComboBox" name="scanParameterOuter">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>30</y>
+         <width>81</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="scanParameterLabel_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>71</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Parameter:</string>
+       </property>
+      </widget>
+      <widget class="QWidget" name="layoutWidget_3">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>30</y>
+         <width>161</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="sweepOptionsLayout_2">
+        <item>
+         <widget class="QCheckBox" name="bidirectionalOuter">
+          <property name="text">
+           <string>Bidirectional</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="continualOuter">
+          <property name="text">
+           <string>Continual</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="rampToStartOuter">
+          <property name="text">
+           <string>Ramp to start</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>Create2DSweep</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>Create2DSweep</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
