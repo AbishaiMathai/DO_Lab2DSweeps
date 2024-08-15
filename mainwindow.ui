@@ -427,11 +427,11 @@
       <attribute name="horizontalHeaderCascadingSectionResizes">
        <bool>true</bool>
       </attribute>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>79</number>
-      </attribute>
       <attribute name="horizontalHeaderMinimumSectionSize">
        <number>10</number>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>79</number>
       </attribute>
       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
        <bool>true</bool>
@@ -662,7 +662,7 @@
      <x>0</x>
      <y>0</y>
      <width>1249</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -698,6 +698,7 @@
     <property name="title">
      <string>2D Sweep</string>
     </property>
+    <addaction name="actionSetup_2D_Sweep"/>
    </widget>
    <widget class="QMenu" name="menuStation">
     <property name="title">
@@ -760,6 +761,16 @@
   <action name="actionLoad_Sequence">
    <property name="text">
     <string>Load Sequence</string>
+   </property>
+  </action>
+  <action name="actionSetup">
+   <property name="text">
+    <string>Setup</string>
+   </property>
+  </action>
+  <action name="actionSetup_2D_Sweep">
+   <property name="text">
+    <string>Setup 2D Sweep</string>
    </property>
   </action>
  </widget>

@@ -53,6 +53,12 @@ class UImain(QtWidgets.QMainWindow):
                                         'bidirectional': False, 'plot_bin': 1, 'save_data': True, 'plot_data': True,
                                         'ramp_to_start': True}}
 
+        # this may need some adjusting later
+        self.sweep_settings2D = { 'time': { 'in_params': [], 'step_sec': '', 'continual': '', 
+                                           'bidirectional': False, 'plot_bin': 1, 'save_data': True, 'plot_data': '', 
+                                           'ramp_to_start': True }}
+
+
         self.set_param_index = 0
         self.init_tables()
         self.make_connections()
@@ -217,7 +223,7 @@ class UImain(QtWidgets.QMainWindow):
                 self.devices[str(name)] = dev
             except Exception as e:
                 self.show_error('Instrument Error', f'Error connecting to {name}, '
-                                                    'either the name is already in use or the device is unavailable.',
+                    'either the name is already in use or the device is unavailable.',
                                 e)
         self.update_instrument_menu()
 
@@ -289,7 +295,7 @@ class UImain(QtWidgets.QMainWindow):
 
             labelitem = QLineEdit(p.label)
             labelitem.editingFinished.connect(lambda p=p, labelitem=labelitem:
-                                              self.update_labels(p, labelitem.text()))
+                self.update_labels(p, labelitem.text()))
             self.ui.followParamTable.setCellWidget(m, 1, labelitem)
 
             valueitem = QTableWidgetItem(str(self.get_param(p)))
@@ -301,7 +307,7 @@ class UImain(QtWidgets.QMainWindow):
 
             updateButton = QPushButton("Get")
             updateButton.clicked.connect(lambda checked, m=m, p=p, valueitem=valueitem:
-                                         valueitem.setText(str(self.get_param(p))))
+                valueitem.setText(str(self.get_param(p))))
             self.ui.followParamTable.setCellWidget(m, 4, updateButton)
 
         # Set up the output parameter table
@@ -319,7 +325,7 @@ class UImain(QtWidgets.QMainWindow):
 
             labelitem = QLineEdit(p.label)
             labelitem.editingFinished.connect(lambda p=p, labelitem=labelitem:
-                                              self.update_labels(p, labelitem.text()))
+                self.update_labels(p, labelitem.text()))
             self.ui.outputParamTable.setCellWidget(n, 1, labelitem)
 
             valueitem = QLineEdit(str(self.get_param(p)))
@@ -327,12 +333,12 @@ class UImain(QtWidgets.QMainWindow):
 
             setButton = QPushButton("Set")
             setButton.clicked.connect(lambda checked, p=p, valueitem=valueitem:
-                                      self.set_param(p, valueitem))
+                self.set_param(p, valueitem))
             self.ui.outputParamTable.setCellWidget(n, 3, setButton)
 
             getButton = QPushButton("Get")
             getButton.clicked.connect(lambda checked, p=p, valueitem=valueitem:
-                                      valueitem.setText(str(self.get_param(p))))
+                valueitem.setText(str(self.get_param(p))))
             self.ui.outputParamTable.setCellWidget(n, 4, getButton)
 
             self.ui.scanParameterBox.addItem(p.label, p)
@@ -359,7 +365,7 @@ class UImain(QtWidgets.QMainWindow):
                 safe_set(p, valueitem.text())
         except ParameterException:
             self.show_error('Error', f'Could not set {p.label} to {valueitem.text()}. Check the command and try '
-                                     'again.')
+                'again.')
 
     def get_param(self, p):
         try:
@@ -395,7 +401,7 @@ class UImain(QtWidgets.QMainWindow):
 
             sweep = Sweep0D(max_time=stop, inter_delay=1 / stepsec, save_data=save,
                             plot_data=plot, plot_bin=plotbin)
-        # Set up Sweep1D if we're not sweeping time
+            # Set up Sweep1D if we're not sweeping time
         else:
             start = _value_parser(self.ui.startEdit.text())
             stop = _value_parser(self.ui.endEdit.text())
@@ -428,7 +434,7 @@ class UImain(QtWidgets.QMainWindow):
 
         if isinstance(sweep, Sweep0D) and len(sweep._params) == 0 and sweep.plot_data:
             self.show_error("Error", "Can't plot time against nothing. Either select some parameters to follow or "
-                                     "unselect \'plot data\'.")
+                "unselect \'plot data\'.")
             sweep = None
 
         return sweep
@@ -448,7 +454,7 @@ class UImain(QtWidgets.QMainWindow):
                 else:
                     return
             elif self.sweep.set_param == self.ui.scanParameterBox.currentData() \
-                    and self.ui.rampToStartBox.isChecked() is False:
+                and self.ui.rampToStartBox.isChecked() is False:
                 alert = QMessageBox()
                 new_sweep = alert.question(self, "Warning!",
                                            "You are about to start a new sweep of the parameter you just swept, "
@@ -469,8 +475,8 @@ class UImain(QtWidgets.QMainWindow):
                 return
         except ValueError:
             self.show_error("Error", "One or more of the sweep input values are invalid. "
-                                     "Valid inputs consist of a number optionally followed by "
-                                     "suffix f/p/n/u/m/k/M/G.")
+                "Valid inputs consist of a number optionally followed by "
+                "suffix f/p/n/u/m/k/M/G.")
             return
 
         save = self.ui.saveBox.isChecked()
@@ -514,8 +520,8 @@ class UImain(QtWidgets.QMainWindow):
                 return
         except ValueError as e:
             self.show_error("Error", "One or more of the sweep input values are invalid. "
-                                     "Valid inputs consist of a number optionally followed by "
-                                     "suffix f/p/n/u/m/k/M/G.", e)
+                "Valid inputs consist of a number optionally followed by "
+                "suffix f/p/n/u/m/k/M/G.", e)
             return
 
         self.sweep_queue.append(sweep)
@@ -612,7 +618,7 @@ class UImain(QtWidgets.QMainWindow):
             elif isinstance(s, BaseSweep):
                 if s.save_data is True and save_configured is False:
                     self.show_error('Error', 'A sweep will try to save data before a database location is set. Fix '
-                                             'and try again.')
+                        'and try again.')
                     return
 
         self.sweep_queue.newSweepSignal.connect(lambda sweep: self.new_queue_sweep(sweep))
@@ -858,7 +864,7 @@ class UImain(QtWidgets.QMainWindow):
         def check_existing_ds(ds):
             for old_ds in self.datasets:
                 if str(ds['run id']) == str(old_ds['run id']) and str(ds['exp name']) == str(old_ds['exp name']) \
-                        and str(ds['sample name']) == str(old_ds['sample name']) and str(ds['db']) == str(old_ds['db']):
+                    and str(ds['sample name']) == str(old_ds['sample name']) and str(ds['db']) == str(old_ds['db']):
                     return False
             return True
 

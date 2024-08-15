@@ -7,26 +7,11 @@ The goal of this is to simplify some of the code from MeasureIt (removing the cl
 ## TODO
 - [x] (initial) clean up the cluttered project structure
 - [ ] implement 2D sweep functionality to the GUI
+    - [x] add 2D Sweeps tab to the statusbar (top) along with the dropdown entry for "Setup 2D Sweep" 
+    - [ ] when "Setup 2D Sweep" is clicked open a new window
+    - [ ] fill the window with fields necessary for configuring and running a 2D sweep
+    - [ ] implement the ability to send the 2D sweep to the sweep queue
 - [ ] create a new requirements file for ease of installation
 - [ ] remove dependency on unmaintained local drivers wherever possible
-- [ ] we should follow best practices for a pyqt project, see below
-
-## Refactoring
-
-While we have already made some progress fixing the original organizational issues with MeasureIt, we can do better. Typical pyqt-based projects follow a structure similar to that shown below. We ought to restructure our project to more closely follow this to stay organized.
-
-```
-├── main.py
-├── ui_main.py
-├── Modules
-│   ├── Time_Data_Recorder
-│   │   ├── TDR.py
-│   │   ├── ui_TDR.py
-│   ├── Spectral_Testing
-│   └── Other_Modules
-└── Third_Party_libraries
-    ├── HDF5
-    ├── Pyacq
-    ├── Plotting
-    └── Other
-```
+- [ ] we should follow best practices for a pyqt project, i.e. getting the ui files moved somewhere out of the root of the project
+- [ ] implement features for controlling lock in amplifiers and temperature controllers
