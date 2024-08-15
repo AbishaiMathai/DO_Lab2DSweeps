@@ -16,3 +16,5 @@ The goal of this is to simplify some of the code from MeasureIt (removing the cl
 - [ ] remove dependency on unmaintained local drivers wherever possible
 - [ ] we should follow best practices for a pyqt project, i.e. getting the ui files moved somewhere out of the root of the project
 - [ ] implement features for controlling lock in amplifiers and temperature controllers
+
+It's very likely we will need to move many things around in the UI when it comes to controlling lock in amplifiers and temperature controllers. I (Grant) suggest we replace the central field with a "tab" arrangement where we can swap between different pages for 1D sweep, 2D sweep, temperature control, etc. Everything can come together (as in many things can be done at once for each device) in the queue which will be overhauled to support these new devices.
