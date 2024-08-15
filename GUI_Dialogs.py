@@ -128,7 +128,7 @@ class EditSweepGUI(QtWidgets.QDialog):
 
             sweep = Sweep0D(max_time=stop, inter_delay=1 / stepsec, save_data=save,
                             plot_data=plot, plot_bin=plotbin)
-        # Set up Sweep1D if we're not sweeping time
+            # Set up Sweep1D if we're not sweeping time
         else:
             start = _value_parser(self.ui.startEdit.text())
             stop = _value_parser(self.ui.endEdit.text())
@@ -412,7 +412,7 @@ class ViewDatasetGUI(QtWidgets.QDialog):
         new_datasets = []
         for ds in self.parent.datasets:
             if str(ds['run id']) == str(self.ds.run_id) and str(ds['exp name']) == str(self.ds.exp_name) \
-                    and str(ds['sample name']) == str(self.ds.sample_name) and str(ds['db']) == str(self.ds_info['db']):
+                and str(ds['sample name']) == str(self.ds.sample_name) and str(ds['db']) == str(self.ds_info['db']):
                 continue
             else:
                 new_datasets.append(ds)
@@ -420,3 +420,16 @@ class ViewDatasetGUI(QtWidgets.QDialog):
         self.parent.datasets = new_datasets
         self.parent.update_datasets()
         self.done(1)
+
+class AddSweepUI(qtWidgets.QDialog):
+    def __init__(self, parent=None):
+        super(AddInstrumentGUI, self).__init__(parent)
+        self.parent = parent
+        self.ui = Ui_addInstrument()
+        self.ui.setupUi(self)
+        self.setWindowTitle("Add Instrument")
+
+        for name, dev in LOCAL_INSTRUMENTS.items():
+            self.ui.instrumentBox.addItem(name, dev)
+
+            self.show()

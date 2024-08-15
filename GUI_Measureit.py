@@ -119,6 +119,7 @@ class UImain(QtWidgets.QMainWindow):
         output_header.setSectionResizeMode(4, QHeaderView.Fixed)
         output_header.resizeSection(4, 40)
 
+    # I believe this is where the action happens -Grant
     def make_connections(self):
         self.ui.editParameterButton.clicked.connect(self.edit_parameters)
         self.ui.startButton.clicked.connect(self.start_sweep)
@@ -148,6 +149,9 @@ class UImain(QtWidgets.QMainWindow):
 
         self.ui.scanParameterBox.currentIndexChanged.connect(self.update_param_combobox)
         self.update_param_combobox(0)
+
+        # new code for 2D sweeps
+        self.ui.actionSetup_2D_Sweep.triggered.connect(self.setup_2D_sweep)
 
     def update_param_combobox(self, index):
         old_set_param = self.ui.scanParameterBox.itemData(self.set_param_index)
@@ -677,6 +681,28 @@ class UImain(QtWidgets.QMainWindow):
 
             except Exception as e:
                 self.show_error('Error', "Could not load the sweep.", e)
+
+    def setup_2D_sweep(self):
+        instrument_ui = AddInstrumentGUI(self)
+        if instrument_ui.exec_():
+            d = instrument_ui.get_selected()
+            try:
+                d['name'] = _name_parser(d['name'])
+            except ValueError as e:
+                self.show_error("Error", "Instrument name must start with a letter.", e)
+                return
+
+            if instrument_ui.ui.nameEdit.text() in self.devices.keys():
+                self.show_error("Error", "Already have an instrument with that name in the station.")
+                return
+
+            # Now, set up our initialization for each device, if it doesn't follow the standard initialization
+            new_dev = self.connect_device(d['device'], d['class'], d['name'], d['address'], d['args'], d['kwargs'])
+
+            if new_dev is not None:
+                self.devices[d['name']] = new_dev
+                self.station.add_component(new_dev, update_snapshot=False)
+                self.update_instrument_menu()
 
     def update_sweep_box(self, settings):
         self.ui.startEdit.setText(str(settings['start']))

@@ -11,6 +11,7 @@ The goal of this is to simplify some of the code from MeasureIt (removing the cl
     - [ ] when "Setup 2D Sweep" is clicked open a new window
     - [ ] fill the window with fields necessary for configuring and running a 2D sweep
     - [ ] implement the ability to send the 2D sweep to the sweep queue
+- [ ] comment the GUI code
 - [ ] create a new requirements file for ease of installation
 - [ ] remove dependency on unmaintained local drivers wherever possible
 - [ ] we should follow best practices for a pyqt project, i.e. getting the ui files moved somewhere out of the root of the project
