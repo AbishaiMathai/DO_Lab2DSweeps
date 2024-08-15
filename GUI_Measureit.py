@@ -151,7 +151,8 @@ class UImain(QtWidgets.QMainWindow):
         self.update_param_combobox(0)
 
         # new code for 2D sweeps
-        self.ui.actionSetup_2D_Sweep.triggered.connect(self.setup_2D_sweep)
+        self.ui.actionCreate_2D_Sweep.triggered.connect(self.create_2D_sweep)
+        # self.ui.actionSetup_2D_Sweep.triggered.connect(self.remove_device)
 
     def update_param_combobox(self, index):
         old_set_param = self.ui.scanParameterBox.itemData(self.set_param_index)
@@ -682,27 +683,13 @@ class UImain(QtWidgets.QMainWindow):
             except Exception as e:
                 self.show_error('Error', "Could not load the sweep.", e)
 
-    def setup_2D_sweep(self):
-        instrument_ui = AddInstrumentGUI(self)
-        if instrument_ui.exec_():
-            d = instrument_ui.get_selected()
-            try:
-                d['name'] = _name_parser(d['name'])
-            except ValueError as e:
-                self.show_error("Error", "Instrument name must start with a letter.", e)
-                return
-
-            if instrument_ui.ui.nameEdit.text() in self.devices.keys():
-                self.show_error("Error", "Already have an instrument with that name in the station.")
-                return
-
-            # Now, set up our initialization for each device, if it doesn't follow the standard initialization
-            new_dev = self.connect_device(d['device'], d['class'], d['name'], d['address'], d['args'], d['kwargs'])
-
-            if new_dev is not None:
-                self.devices[d['name']] = new_dev
-                self.station.add_component(new_dev, update_snapshot=False)
-                self.update_instrument_menu()
+    def create_2D_sweep(self):
+        remove_ui = Add2DSweepGUI(self)
+        # remove_ui = RemoveInstrumentGUI(self.devices, self)
+        if remove_ui.exec_():
+            dev = remove_ui.ui.instrumentBox.currentText()
+            if len(dev) > 0:
+                self.do_remove_device(dev)
 
     def update_sweep_box(self, settings):
         self.ui.startEdit.setText(str(settings['start']))

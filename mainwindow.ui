@@ -183,6 +183,26 @@
        <string>End</string>
       </property>
      </widget>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>100</y>
+        <width>127</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+      </widget>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="setupBox">
      <property name="geometry">
@@ -698,7 +718,7 @@
     <property name="title">
      <string>2D Sweep</string>
     </property>
-    <addaction name="actionSetup_2D_Sweep"/>
+    <addaction name="actionCreate_2D_Sweep"/>
    </widget>
    <widget class="QMenu" name="menuStation">
     <property name="title">
@@ -768,7 +788,7 @@
     <string>Setup</string>
    </property>
   </action>
-  <action name="actionSetup_2D_Sweep">
+  <action name="actionCreate_2D_Sweep">
    <property name="text">
     <string>Setup 2D Sweep</string>
    </property>

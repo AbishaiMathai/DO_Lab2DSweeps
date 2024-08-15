@@ -34,8 +34,8 @@
     <rect>
      <x>20</x>
      <y>20</y>
-     <width>171</width>
-     <height>131</height>
+     <width>198</width>
+     <height>163</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="scanHorizontalLayout">
@@ -122,7 +122,7 @@
      <x>200</x>
      <y>20</y>
      <width>122</width>
-     <height>131</height>
+     <height>157</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="sweepOptionsLayout">

@@ -35,7 +35,7 @@
      <x>20</x>
      <y>20</y>
      <width>211</width>
-     <height>91</height>
+     <height>98</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="descriptionLayout">

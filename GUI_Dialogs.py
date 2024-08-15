@@ -10,6 +10,7 @@ from remove_instrument_ui import Ui_removeInstrument
 from save_data_ui import Ui_saveData
 from edit_sweep_ui import Ui_editSweep
 from view_dataset_ui import Ui_viewDataset
+from create_2D_sweep_ui import Ui_Create2DSweep
 from qcodes.dataset.plotting import plot_dataset
 
 sys.path.append("..")
@@ -421,15 +422,11 @@ class ViewDatasetGUI(QtWidgets.QDialog):
         self.parent.update_datasets()
         self.done(1)
 
-class AddSweepUI(qtWidgets.QDialog):
+class Add2DSweepGUI(QtWidgets.QDialog):
     def __init__(self, parent=None):
-        super(AddInstrumentGUI, self).__init__(parent)
+        super(Add2DSweepGUI, self).__init__(parent)
         self.parent = parent
-        self.ui = Ui_addInstrument()
+        self.ui = Ui_Create2DSweep()
         self.ui.setupUi(self)
-        self.setWindowTitle("Add Instrument")
-
-        for name, dev in LOCAL_INSTRUMENTS.items():
-            self.ui.instrumentBox.addItem(name, dev)
-
-            self.show()
+        self.setWindowTitle("Create 2D Sweep")
+        self.show()
