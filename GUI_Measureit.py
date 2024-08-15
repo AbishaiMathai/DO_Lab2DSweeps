@@ -10,7 +10,7 @@ from pathlib import Path
 from datetime import datetime
 from ruamel.yaml import YAML
 import matplotlib
-from mainwindow_ui import Ui_MeasureIt
+from resources.ui.mainwindow_ui import Ui_MeasureIt
 from GUI_Dialogs import *
 from handlers import WriteStream, OutputThread
 from queue import Queue

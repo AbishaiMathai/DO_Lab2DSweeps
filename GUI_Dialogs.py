@@ -3,14 +3,14 @@ from PyQt5.QtWidgets import QListWidgetItem, QFileDialog
 import sys, os
 import matplotlib.pyplot as plt
 from GUI_Measureit import *
-from edit_parameter_ui import Ui_editParameter
-from add_instrument_ui import Ui_addInstrument
-from save_station_ui import Ui_saveStation
-from remove_instrument_ui import Ui_removeInstrument
-from save_data_ui import Ui_saveData
-from edit_sweep_ui import Ui_editSweep
-from view_dataset_ui import Ui_viewDataset
-from create_2D_sweep_ui import Ui_Create2DSweep
+from resources.ui.edit_parameter_ui import Ui_editParameter
+from resources.ui.add_instrument_ui import Ui_addInstrument
+from resources.ui.save_station_ui import Ui_saveStation
+from resources.ui.remove_instrument_ui import Ui_removeInstrument
+from resources.ui.save_data_ui import Ui_saveData
+from resources.ui.edit_sweep_ui import Ui_editSweep
+from resources.ui.view_dataset_ui import Ui_viewDataset
+from resources.ui.create_2D_sweep_ui import Ui_Create2DSweep
 from qcodes.dataset.plotting import plot_dataset
 
 sys.path.append("..")
