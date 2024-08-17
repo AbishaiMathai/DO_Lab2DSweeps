@@ -36,7 +36,8 @@ from utils.file_paths import FILE_PATHS
 
 for path_name, path_value in FILE_PATHS.items():
     if not os.path.exists(path_value):
-        print(f"Warning: {path_name} does not exist.")
+        print(f"Warning: {path_value} does not exist.")
+        os.mkdir(path_value)
 
 
 class UImain(QtWidgets.QMainWindow):
